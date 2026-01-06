@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanDrasti - Smart Crop Price Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🌾</span>
+                    <span class="logo-text" data-en="KisanDrasti" data-hi="किसानदृष्टि">KisanDrasti</span>
+                </div>
+                <div class="header-actions">
+                    <button class="lang-toggle" id="langToggle">
+                        <span class="lang-text">हिं</span>
+                    </button>
+                    <button class="notification-btn" id="notificationBtn">
+                        <span class="notification-icon">🔔</span>
+                        <span class="notification-badge" id="notificationBadge">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title" data-en="Get the Best Price for Your Crops" data-hi="अपनी फसल के लिए सर्वोत्तम मूल्य प्राप्त करें">
+                Get the Best Price for Your Crops
+            </h1>
+            <p class="hero-subtitle" data-en="Compare real-time prices across APMC Mandis, Private Buyers, and FPOs" data-hi="APMC मंडियों, निजी खरीदारों और FPO में वास्तविक समय की कीमतों की तुलना करें">
+                Compare real-time prices across APMC Mandis, Private Buyers, and FPOs
+            </p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-card">
+                <label class="search-label" data-en="Select Your Crop" data-hi="अपनी फसल चुनें">Select Your Crop</label>
+                <div class="search-input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <select class="search-input" id="cropSelect">
+                        <option value="" data-en="Choose a crop..." data-hi="फसल चुनें...">Choose a crop...</option>
+                    </select>
+                </div>
+                <button class="search-btn" id="searchBtn" data-en="Compare Prices" data-hi="कीमतों की तुलना करें">
+                    Compare Prices
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alerts Section -->
+    <section class="alerts-section" id="alertsSection" style="display: none;">
+        <div class="container">
+            <div class="alerts-container" id="alertsContainer">
+                <!-- Alerts will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Comparison Section -->
+    <section class="comparison-section" id="comparisonSection" style="display: none;">
+        <div class="container">
+            <h2 class="section-title" data-en="Price Comparison" data-hi="मूल्य तुलना">Price Comparison</h2>
+            
+            <div class="price-cards">
+                <!-- APMC Mandi Card -->
+                <div class="price-card">
+                    <div class="price-card-header apmc">
+                        <span class="price-card-icon">🏛️</span>
+                        <h3 class="price-card-title" data-en="APMC Mandi" data-hi="APMC मंडी">APMC Mandi</h3>
+                    </div>
+                    <div class="price-card-body">
+                        <div class="price-value" id="apmcPrice">₹0</div>
+                        <div class="price-unit" data-en="per quintal" data-hi="प्रति क्विंटल">per quintal</div>
+                        <div class="price-location" id="apmcLocation">-</div>
+                        <div class="price-trend" id="apmcTrend"></div>
+                    </div>
+                </div>
+
+                <!-- Private Buyer Card -->
+                <div class="price-card">
+                    <div class="price-card-header private">
+                        <span class="price-card-icon">🤝</span>
+                        <h3 class="price-card-title" data-en="Private Buyer" data-hi="निजी खरीदार">Private Buyer</h3>
+                    </div>
+                    <div class="price-card-body">
+                        <div class="price-value" id="privatePrice">₹0</div>
+                        <div class="price-unit" data-en="per quintal" data-hi="प्रति क्विंटल">per quintal</div>
+                        <div class="price-location" id="privateLocation">-</div>
+                        <div class="price-trend" id="privateTrend"></div>
+                    </div>
+                </div>
+
+                <!-- FPO Card -->
+                <div class="price-card">
+                    <div class="price-card-header fpo">
+                        <span class="price-card-icon">👥</span>
+                        <h3 class="price-card-title" data-en="FPO" data-hi="FPO">FPO</h3>
+                    </div>
+                    <div class="price-card-body">
+                        <div class="price-value" id="fpoPrice">₹0</div>
+                        <div class="price-unit" data-en="per quintal" data-hi="प्रति क्विंटल">per quintal</div>
+                        <div class="price-location" id="fpoLocation">-</div>
+                        <div class="price-trend" id="fpoTrend"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Price Recommendation -->
+            <div class="recommendation-card" id="recommendationCard">
+                <div class="recommendation-icon">⭐</div>
+                <div class="recommendation-content">
+                    <h3 class="recommendation-title" data-en="Best Price Recommendation" data-hi="सर्वोत्तम मूल्य सिफारिश">Best Price Recommendation</h3>
+                    <p class="recommendation-text" id="recommendationText"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prediction Section -->
+    <section class="prediction-section" id="predictionSection" style="display: none;">
+        <div class="container">
+            <h2 class="section-title" data-en="Price Prediction & Trends" data-hi="मूल्य पूर्वानुमान और रुझान">Price Prediction & Trends</h2>
+            
+            <div class="prediction-grid">
+                <!-- Prediction Card -->
+                <div class="prediction-card">
+                    <h3 class="prediction-card-title" data-en="24-72 Hour Forecast" data-hi="24-72 घंटे का पूर्वानुमान">24-72 Hour Forecast</h3>
+                    <div class="prediction-chart-container">
+                        <canvas id="predictionChart"></canvas>
+                    </div>
+                    <div class="prediction-details" id="predictionDetails">
+                        <!-- Prediction details will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Best Selling Window -->
+                <div class="selling-window-card">
+                    <h3 class="selling-window-title" data-en="Best Selling Window" data-hi="बेचने का सर्वोत्तम समय">Best Selling Window</h3>
+                    <div class="selling-window-content" id="sellingWindowContent">
+                        <!-- Selling window info will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text" data-en="Empowering farmers with transparent pricing" data-hi="पारदर्शी मूल्य निर्धारण के साथ किसानों को सशक्त बनाना">
+                Empowering farmers with transparent pricing
+            </p>
+            <p class="footer-copyright">© 2026 KisanDrasti</p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text" data-en="Loading prices..." data-hi="कीमतें लोड हो रही हैं...">Loading prices...</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
