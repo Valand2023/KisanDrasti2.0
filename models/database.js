@@ -10,7 +10,8 @@ exports.initializeDatabase = () => {
     return new Promise((resolve, reject) => {
         db = new sqlite3.Database(DB_PATH, (err) => {
             if (err) {
-                console.error('Error opening database:', err);
+                console.error('CRITICAL: Error opening database file at:', DB_PATH);
+                console.error('Error details:', err);
                 reject(err);
                 return;
             }

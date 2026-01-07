@@ -15,6 +15,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // API Routes
 app.use('/api', apiRoutes);
 
+// Health Check Endpoint for Render
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // Serve index.html for root route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -30,15 +35,19 @@ app.use((err, req, res, next) => {
 });
 
 // Initialize database and start server
+console.log('🚀 Starting server initialization...');
 initializeDatabase()
     .then(() => {
-        app.listen(PORT, () => {
-            console.log(`🌾 KisanDrasti server running on http://localhost:${PORT}`);
-            console.log(`📊 API available at http://localhost:${PORT}/api`);
+        app.listen(PORT, '0.0.0.0', () => {
+            console.log(`🌾 KisanDrasti server running on port ${PORT}`);
+            console.log(`📊 API available at /api`);
+            console.log(`🏥 Health check at /health`);
+            console.log(`🏠 Environment: ${process.env.NODE_ENV || 'development'}`);
         });
     })
     .catch(err => {
-        console.error('Failed to initialize database:', err);
+        console.error('FATAL ERROR: Failed to initialize database during startup');
+        console.error(err);
         process.exit(1);
     });
 
